@@ -71,15 +71,15 @@ const getResults = async () => {
   return results;
 };
 
-// export async function getStaticProps() {
-//   const results = await (await getResults()).json();
+export async function getStaticProps() {
+  const results = await (await getResults()).json();
 
-//   return {
-//     props: {
-//       results,
-//     },
-//     revalidate: 900,
-//   };
-// }
+  return {
+    props: {
+      results,
+    },
+    revalidate: 900,
+  };
+}
 
 export default Home
