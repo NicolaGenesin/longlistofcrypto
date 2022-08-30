@@ -8,7 +8,7 @@ import { url } from '../env'
 
 const headers = ["#", "Project Name", "Category", "Sub-category", "Chain", "1-liner Description"]
 
-const Home: NextPage = ({ results }: any) => {
+const Home: NextPage = ({ results = [] }: any) => {
   return (
     <Box className={styles.container}>
       <Head>
@@ -71,15 +71,15 @@ const getResults = async () => {
   return results;
 };
 
-export async function getStaticProps() {
-  const results = await (await getResults()).json();
+// export async function getStaticProps() {
+//   const results = await (await getResults()).json();
 
-  return {
-    props: {
-      results,
-    },
-    revalidate: 900,
-  };
-}
+//   return {
+//     props: {
+//       results,
+//     },
+//     revalidate: 900,
+//   };
+// }
 
 export default Home
