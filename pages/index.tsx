@@ -28,7 +28,7 @@ const Home: NextPage = ({ results = [] }: any) => {
         </p>
 
         <TableContainer>
-          <Table size='sm' overflowX="auto" variant='striped' colorScheme='teal'>
+          <Table size='sm' overflowX="auto" variant='striped' colorScheme='orange'>
             <Thead>
               <Tr>
                 {headers.map((header, index) => (<Th key={`header-${index}`}>{header}</Th>))}
