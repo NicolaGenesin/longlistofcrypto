@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Link, Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Link, Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Center, Text } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -22,10 +22,12 @@ const Home: NextPage = ({ results = [] }: any) => {
           Welcome to Long list of Crypto!
         </h1>
 
-        <p className={styles.description}>
-          A long list of blockchain/crypto/Web3 projects with respective 1-liner description.<br />
-          Managed by Michael, reach out on Twitter: <a style={{ color: 'teal' }} href={"https://twitter.com/brazenburrit0"}>brazenburrit0</a> or Telegram: @brazenburrito
-        </p>
+        <Box textAlign="center" mt="16px" mb="24px">
+          <Text>A long list of blockchain/crypto/Web3 projects with respective 1-liner description.</Text>
+          <Text>Managed by Michael, reach out on Twitter: <a style={{ color: 'teal' }} href={"https://twitter.com/brazenburrit0"}>brazenburrit0</a> or Telegram: @brazenburrito</Text>
+          <Text fontSize="xs" mt={2}>If you come across a new project or a project that has yet to be included in the list, please fill up this form and I will add to the list: <Link style={{ textDecoration: "underline" }} href="https://forms.gle/BssASs7NWRWdmQ4S9">Contribution Form Link</Link></Text>
+          <Text fontSize="xs">Entirely optional but can support me @ brazenburrito.eth | 0xb3e1EF38c290016dbfc3D13d1C91c32B6ec0C0C7</Text>
+        </Box>
 
         <TableContainer>
           <Table size='sm' overflowX="auto" variant='striped' colorScheme='orange'>
@@ -55,7 +57,7 @@ const Home: NextPage = ({ results = [] }: any) => {
             </Tbody>
           </Table>
         </TableContainer>
-      </main>
+      </main >
       <footer className={styles.footer}>
         <b>Contributed by Community; Owned by Community; For the Community</b>
       </footer>
