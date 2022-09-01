@@ -56,19 +56,21 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          <b>Long list of Crypto</b>
-        </h1>
+        <Box backgroundImage={"/header.jpg"} p={24} mb={4} rounded="xl" textAlign="center" >
+          <h1 className={styles.title}>
+            <b>Long list of Crypto</b>
+          </h1>
 
-        <Text fontSize="xl" mt={4} mb={4}>
-          🚧 <b>{results.length}</b> so far - {lastUpdated} - {lastAdded} 🚧
-        </Text>
+          <Text fontSize="xl" mt={4} mb={4}>
+            🚧 <b>{results.length}</b> so far - {lastUpdated} - {lastAdded} 🚧
+          </Text>
 
-        <Box textAlign="center" mt="16px" mb="24px">
-          <Text>A long list of blockchain/crypto/Web3 projects with respective 1-liner description.</Text>
-          <Text>Managed by Michael, reach out on Twitter: <a style={{ color: 'teal' }} href={"https://twitter.com/brazenburrit0"}>brazenburrit0</a> or Telegram: @brazenburrito</Text>
-          <Text fontSize="xs" mt={2} fontStyle="italic">If you come across a new project or a project that has yet to be included in the list, please fill up this form and I will add to the list: <Link style={{ textDecoration: "underline" }} href="https://forms.gle/BssASs7NWRWdmQ4S9">Contribution Form Link</Link></Text>
-          <Text fontSize="xs" fontStyle="italic">Entirely optional but can support @ brazenburrito.eth | 0xb3e1EF38c290016dbfc3D13d1C91c32B6ec0C0C7</Text>
+          <Box mt="16px" mb="24px" >
+            <Text>A long list of blockchain/crypto/Web3 projects with respective 1-liner description.</Text>
+            <Text>Managed by Michael, reach out on Twitter: <a style={{ color: 'teal' }} href={"https://twitter.com/brazenburrit0"}>brazenburrit0</a> or Telegram: @brazenburrito</Text>
+            <Text fontSize="xs" mt={2} fontStyle="italic">If you come across a new project or a project that has yet to be included in the list, please fill up this form and I will add to the list: <Link style={{ textDecoration: "underline" }} href="https://forms.gle/BssASs7NWRWdmQ4S9">Contribution Form Link</Link></Text>
+            <Text fontSize="xs" fontStyle="italic">Entirely optional but can support @ brazenburrito.eth | 0xb3e1EF38c290016dbfc3D13d1C91c32B6ec0C0C7</Text>
+          </Box>
         </Box>
 
         <HStack mb={8} mt={4}>
@@ -82,7 +84,7 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
         </HStack>
 
         <TableContainer>
-          <Table size='sm' overflowX="auto" variant='striped' colorScheme='orange'>
+          <Table size='sm' variant='striped' colorScheme='orange'>
             <Thead>
               <Tr>
                 {headers.map((header, index) => (<Th key={`header-${index}`}>{header}</Th>))}

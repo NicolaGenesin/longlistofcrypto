@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           body {
             height: 100% !important;
             width: 100% !important;
-            background-image: url(/bkg.jpg) !important;
+            background-color: #fffef2;
             background-repeat: no-repeat !important;
             background-attachment: fixed !important;
             background-size: cover !important;
