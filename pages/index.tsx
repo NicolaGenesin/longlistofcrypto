@@ -5,7 +5,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { url } from '../env'
 
-const headers = ["#", "Project Name", "Category", "Sub-category", "Chain", "1-liner Description"]
+const headers = ["#", "Project Name", "Category", "Sub-category", "Chain", "1-liner Description", "Date Added"]
 
 const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
   const selectsData: any = useMemo(() => {
@@ -14,13 +14,20 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
     results.forEach((r: string[]) => {
       const category = r[2]
 
-      if (!tmp[category]) {
+      // Hack: some emoji look the same, but they have a different code
+      const categoryWithoutEmoji = category.slice(3)
+      const existingCategories = Object.keys(tmp)
+      const existingCategory = existingCategories.find(x => x.includes(categoryWithoutEmoji))
+
+      if (!tmp[category] && !existingCategory) {
         tmp[category] = [r[3]]
       } else {
-        if (!tmp[category].find((s: string) => s === r[3])) {
-          tmp[category].push(r[3])
+        if (!tmp[existingCategory || category].find((s: string) => s === r[3])) {
+          tmp[existingCategory || category].push(r[3])
         }
       }
+      // End Hack
+
     })
 
     return tmp
@@ -57,16 +64,19 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
       </Head>
 
       <main className={styles.main}>
-        <Box backgroundImage={"/header.jpg"} p={24} mb={4} rounded="xl" textAlign="center" >
-          <h1 className={styles.title}>
+        <Box backgroundImage={"/header.jpg"} p={8} mb={4} rounded="xl" textAlign="center">
+          <Text as="h1" fontSize="4xl" mb={4}>
             <b>Long list of Crypto</b>
-          </h1>
-
-          <Text fontSize="xl" mt={4} mb={4}>
-            🚧 <b>{results.length}</b> so far - {lastUpdated} - {lastAdded} 🚧
           </Text>
 
-          <Box mt="16px" mb="24px" >
+          {
+            results &&
+            <Text fontSize="xl" mt={4} mb={4}>
+              🚧 <b>{results.length} so far - {lastUpdated} - {lastAdded}</b> 🚧
+            </Text>
+          }
+
+          <Box mt="16px" mb="8px" >
             <Text>A long list of blockchain/crypto/Web3 projects with respective 1-liner description.</Text>
             <Text>Managed by Michael, reach out on Twitter: <a style={{ color: 'teal' }} href={"https://twitter.com/brazenburrit0"}>brazenburrit0</a> or Telegram: @brazenburrito</Text>
             <Text fontSize="xs" mt={2} fontStyle="italic">If you come across a new project or a project that has yet to be included in the list, please fill up this form and I will add to the list: <Link style={{ textDecoration: "underline" }} href="https://forms.gle/BssASs7NWRWdmQ4S9">Contribution Form Link</Link></Text>
@@ -114,6 +124,7 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
                       )) : "-"}
                     </Td>
                     <Td p={2} key="td-description" fontSize="xs">{row[5]}</Td>
+                    <Td p={2} key="td-addedon" fontSize="xs">{row[7]}</Td>
                   </Tr>
                 ))}
             </Tbody>

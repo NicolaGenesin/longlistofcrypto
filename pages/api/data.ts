@@ -18,8 +18,8 @@ const getResults = async () => {
   await sheet.loadHeaderRow(7);
   await sheet.loadCells();
   const rows = await sheet.getRows({ limit: 1800 });
-  const lastUpdated = await sheet.getCell(2, 5)._rawData.formattedValue;
-  const lastAdded = await sheet.getCell(2, 6)._rawData.formattedValue;
+  const lastUpdated = await sheet.getCell(4, 5)._rawData.formattedValue;
+  const lastAdded = await sheet.getCell(4, 6)._rawData.formattedValue;
 
   console.log(lastUpdated)
 
@@ -36,6 +36,10 @@ const getResults = async () => {
     }
 
     if (tmp[1]) {
+      if (!tmp[7]) {
+        tmp.push("-") // Missing date added
+      }
+
       results.push(tmp);
     }
   }
