@@ -27,7 +27,6 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
         }
       }
       // End Hack
-
     })
 
     return tmp
@@ -146,13 +145,13 @@ const getData = async () => {
   return results;
 };
 
-export async function getStaticProps() {
-  const { results, lastAdded, lastUpdated } = await (await getData()).json();
+// export async function getStaticProps() {
+//   const { results, lastAdded, lastUpdated } = await (await getData()).json();
 
-  return {
-    props: { results, lastAdded, lastUpdated },
-    revalidate: 900,
-  };
-}
+//   return {
+//     props: { results, lastAdded, lastUpdated },
+//     revalidate: 900,
+//   };
+// }
 
 export default Home
