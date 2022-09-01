@@ -8,7 +8,7 @@ import { url } from '../env'
 
 const headers = ["#", "Project Name", "Category", "Sub-category", "Chain", "1-liner Description"]
 
-const Home: NextPage = ({ results = [] }: any) => {
+const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
   const selectsData: any = useMemo(() => {
     const tmp: any = {}
 
@@ -60,8 +60,8 @@ const Home: NextPage = ({ results = [] }: any) => {
           <b>Long list of Crypto</b>
         </h1>
 
-        <Text size="l">
-          (🚧 <b>{results.length}</b> so far... 🗄️)
+        <Text fontSize="xl" mt={4} mb={4}>
+          🚧 <b>{results.length}</b> so far - {lastUpdated} - {lastAdded} 🚧
         </Text>
 
         <Box textAlign="center" mt="16px" mb="24px">
@@ -71,7 +71,7 @@ const Home: NextPage = ({ results = [] }: any) => {
           <Text fontSize="xs" fontStyle="italic">Entirely optional but can support @ brazenburrito.eth | 0xb3e1EF38c290016dbfc3D13d1C91c32B6ec0C0C7</Text>
         </Box>
 
-        <HStack mb={8}>
+        <HStack mb={8} mt={4}>
           <Select placeholder='Select Category' bg="white" size="sm" onChange={e => { setSelectedCategory(e.target.value) }} value={selectedCategory}>
             {Object.keys(selectsData).map(c => <option key={c} value={c}>{c}</option>)}
           </Select>
@@ -118,7 +118,7 @@ const Home: NextPage = ({ results = [] }: any) => {
   )
 }
 
-const getResults = async () => {
+const getData = async () => {
   const results = fetch(`${url}/api/data`, {
     method: "GET",
   });
@@ -127,12 +127,10 @@ const getResults = async () => {
 };
 
 export async function getStaticProps() {
-  const results = await (await getResults()).json();
+  const { results, lastAdded, lastUpdated } = await (await getData()).json();
 
   return {
-    props: {
-      results,
-    },
+    props: { results, lastAdded, lastUpdated },
     revalidate: 900,
   };
 }

@@ -18,6 +18,10 @@ const getResults = async () => {
   await sheet.loadHeaderRow(7);
   await sheet.loadCells();
   const rows = await sheet.getRows({ limit: 1800 });
+  const lastUpdated = await sheet.getCell(2, 5)._rawData.formattedValue;
+  const lastAdded = await sheet.getCell(2, 6)._rawData.formattedValue;
+
+  console.log(lastUpdated)
 
   const results = [];
 
@@ -36,16 +40,16 @@ const getResults = async () => {
     }
   }
 
-  return results;
+  return { results, lastUpdated, lastAdded };
 };
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<any[][]>
+  res: NextApiResponse<any>
 ) => {
-  const results = await getResults();
+  const data = await getResults();
 
-  res.status(200).json(results)
+  res.status(200).json(data)
 }
 
 export default handler;
