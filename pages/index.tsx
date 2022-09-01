@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState, useMemo } from 'react'
-import { Link, Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Center, Text, Select, HStack } from '@chakra-ui/react'
+import { Link, Box, Table, useMediaQuery, Tbody, Td, Th, Thead, Tr, Text, Select, HStack } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { url } from '../env'
 
@@ -47,6 +46,8 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
     setSelectedSubCategory(undefined)
   }, [selectedCategory]);
 
+  const [isSmallViewport] = useMediaQuery('(min-width: 960px)')
+
   return (
     <Box className={styles.container} bg="#fffef2">
       <Head>
@@ -83,7 +84,13 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
           </Select>}
         </HStack>
 
-        <TableContainer>
+        <Box style={{
+          display: "block",
+          maxWidth: "100%",
+          overflowX: "auto",
+          overflowY: "hidden",
+          whiteSpace: !isSmallViewport ? "nowrap" : "normal"
+        }}>
           <Table size='sm' variant='striped' colorScheme='orange'>
             <Thead>
               <Tr>
@@ -95,8 +102,8 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
                 .map((row: string[], index: number) => (
                   <Tr key={`crypto-${index}`}>
                     <Td p={2} key="td-index">{row[0]}</Td>
-                    <Td p={2} key="td-projectname">🔗 <Link href={row[6]}><b>{row[1]}</b></Link></Td>
-                    <Td p={2} key="td-category" fontSize="xs">{row[2]}</Td>
+                    <Td p={2} key="td-projectname" style={{ whiteSpace: "nowrap" }}>🔗 <Link href={row[6]}><b>{row[1]}</b></Link></Td>
+                    <Td p={2} key="td-category" fontSize="xs" style={{ whiteSpace: "nowrap" }}>{row[2]}</Td>
                     <Td p={2} key="td-subcategory" fontSize="xs">{row[3]}</Td>
                     <Td p={2} key="td-chain" fontSize="xs">
                       {row[4] ? row[4].split(', ').map((s: string, index: number) => (
@@ -111,7 +118,7 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
                 ))}
             </Tbody>
           </Table>
-        </TableContainer>
+        </Box>
       </main >
       <footer className={styles.footer}>
         <b>Contributed by Community; Owned by Community; For the Community</b>
