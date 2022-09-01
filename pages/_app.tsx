@@ -1,9 +1,16 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+
+const theme = extendTheme({
+  fonts: {
+    heading: "Montserrat",
+    body: "Montserrat",
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <ChakraProvider>
+  return <ChakraProvider theme={theme}>
     <Component {...pageProps} />
     <style jsx global>{`
           html,
