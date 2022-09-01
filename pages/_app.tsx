@@ -12,21 +12,6 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }: AppProps) {
   return <ChakraProvider theme={theme}>
     <Component {...pageProps} />
-    <style jsx global>{`
-          html,
-          body {
-            height: 100% !important;
-            width: 100% !important;
-            background-color: #fffef2;
-            background-repeat: no-repeat !important;
-            background-attachment: fixed !important;
-            background-size: cover !important;
-          }
-
-          * {
-            box-sizing: border-box;
-          }
-        `}</style>
   </ChakraProvider>
 }
 

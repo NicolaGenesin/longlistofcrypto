@@ -48,7 +48,7 @@ const Home: NextPage = ({ results = [], lastAdded, lastUpdated }: any) => {
   }, [selectedCategory]);
 
   return (
-    <Box className={styles.container}>
+    <Box className={styles.container} bg="#fffef2">
       <Head>
         <title>Long list of Crypto</title>
         <meta name="description" content="A long list of blockchain/crypto/Web3 projects with respective 1-liner description." />
