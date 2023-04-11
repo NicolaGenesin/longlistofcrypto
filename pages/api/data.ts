@@ -17,7 +17,7 @@ const getResults = async () => {
   const sheet = doc.sheetsByIndex[1];
   await sheet.loadHeaderRow(7);
   await sheet.loadCells();
-  const rows = await sheet.getRows({ limit: 2200 });
+  const rows = await sheet.getRows({ limit: 3000 });
   const lastUpdated = await sheet.getCell(4, 5)._rawData.formattedValue;
   const lastAdded = await sheet.getCell(4, 6)._rawData.formattedValue;
 
